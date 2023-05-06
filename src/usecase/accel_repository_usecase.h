@@ -7,13 +7,13 @@
 
 #include "../domain/accel.h"
 
-class AccelRepository
+class FlashRepository
 {
 public:
     SPIFlashHandlerDATABASE *spiFlashHandler;
     // ICM20948HandlerDATABASE *icm20948Handler;
     // AccelRepository(SPIFlashHandlerDATABASE *spiFlashHandler, ICM20948HandlerDATABASE *icm20948Handler) : spiFlashHandler(spiFlashHandler), icm20948Handler(icm20948Handler) {}
-    AccelRepository(SPIFlashHandlerDATABASE *spiFlashHandler) : spiFlashHandler(spiFlashHandler) {}
+    FlashRepository(SPIFlashHandlerDATABASE *spiFlashHandler) : spiFlashHandler(spiFlashHandler) {}
 
 public:
     virtual bool SaveAccel(uint8_t addr, Accel accel) = 0;

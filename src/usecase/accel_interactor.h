@@ -24,12 +24,12 @@ public:
 
 bool FlashInteractor::AddAccel(uint8_t addr, Accel accel)
 {
-    return accelRepository->SaveAccel(addr, accel);
+    return flashRepository->SaveAccel(addr, accel);
 }
 
 Accel FlashInteractor::OneAccel(uint8_t id)
 {
-    return accelRepository->GetAccel(id);
+    return flashRepository->GetAccel(id);
 }
 
 // Accels FlashInteractor::PageAccels(uint8_t id)

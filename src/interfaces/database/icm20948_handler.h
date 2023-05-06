@@ -12,3 +12,5 @@ public:
     virtual uint8_t WhoAmI() = 0;
     virtual void Get(int16_t *rx, uint8_t *rx_buf) = 0;
 };
+
+#endif

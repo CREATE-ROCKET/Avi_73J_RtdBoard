@@ -11,5 +11,5 @@ void loop()
     accel.AccelY = 2;
     accel.AccelZ = 3;
     uint8_t addr = 0;
-    Router1.accelController->Add(addr, accel);
+    Router1.flashController->Add(addr, accel);
 }

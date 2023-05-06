@@ -13,35 +13,35 @@
 #include "../database/spiflash_handler.h"
 #include "../database/accel_repository.h"
 
-class AccelController
+class FlashController
 {
 private:
-    AccelInteractor Interactor;
+    FlashInteractor Interactor;
 
 public:
-    AccelController(SPIFlashHandlerDATABASE* handler) : Interactor(new AccelRepositoryDATABASE(handler)) {}
+    FlashController(SPIFlashHandlerDATABASE* handler) : Interactor(new FlashRepositoryDATABASE(handler)) {}
 
     bool Add(uint8_t addr, Accel accel);
     Accel Read(uint8_t id);
     // Accels ReadPage(uint8_t id);
 };
 
-AccelController *NewAccelController(SPIFlashHandlerDATABASE* handler)
+FlashController *NewFlashController(SPIFlashHandlerDATABASE* handler)
 {
-    return new AccelController(handler);
+    return new FlashController(handler);
 }
 
-bool AccelController::Add(uint8_t addr, Accel accel)
+bool FlashController::Add(uint8_t addr, Accel accel)
 {
     return Interactor.AddAccel(addr, accel);
 }
 
-Accel AccelController::Read(uint8_t id)
+Accel FlashController::Read(uint8_t id)
 {
     return Interactor.OneAccel(id);
 }
 
-// Accels AccelController::ReadPage(uint8_t id)
+// Accels FlashController::ReadPage(uint8_t id)
 // {
 //     return Interactor.PageAccels(id);
 // }

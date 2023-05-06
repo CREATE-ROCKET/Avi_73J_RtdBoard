@@ -12,29 +12,29 @@
 
 
 
-class lashRepositoryDATABASE : public AccelRepository
+class FlashRepositoryDATABASE : public FlashRepository
 {
 public:
-    AccelRepositoryDATABASE(SPIFlashHandlerDATABASE *spiFlashHandler, ICM20948HandlerDATABASE *icm20948Handler) : AccelRepository(spiFlashHandler, icm20948Handler) {}
-    // AccelRepositoryDATABASE(SPIFlashHandlerDATABASE *spiFlashHandler) : AccelRepository(spiFlashHandler) {}
+    // FlashRepositoryDATABASE(SPIFlashHandlerDATABASE *spiFlashHandler, ICM20948HandlerDATABASE *icm20948Handler) : FlashRepository(spiFlashHandler, icm20948Handler) {}
+    FlashRepositoryDATABASE(SPIFlashHandlerDATABASE *spiFlashHandler) : FlashRepository(spiFlashHandler) {}
 
     bool SaveAccel(uint8_t addr, Accel accel) override;
     Accel GetAccel(uint8_t addr) override;
     // Accels GetAccels(uint8_t id) override;
 };
 
-bool AccelRepositoryDATABASE::SaveAccel(uint8_t addr, Accel accel)
+bool FlashRepositoryDATABASE::SaveAccel(uint8_t addr, Accel accel)
 {
     uint8_t tx[3];
     tx[0] = accel.AccelX;
     tx[1] = accel.AccelY;
     tx[2] = accel.AccelZ;
-    icm20948Handler->Get();
+    // icm20948Handler->Get();
     spiFlashHandler->write(addr, tx);
     return true;
 }
 
-Accel AccelRepositoryDATABASE::GetAccel(uint8_t addr)
+Accel FlashRepositoryDATABASE::GetAccel(uint8_t addr)
 {
     uint8_t rx[3];
     spiFlashHandler->read(addr, rx);
@@ -45,7 +45,7 @@ Accel AccelRepositoryDATABASE::GetAccel(uint8_t addr)
     return a;
 }
 
-// Accels AccelRepositoryDATABASE::GetAccels(uint8_t id)
+// Accels FlashRepositoryDATABASE::GetAccels(uint8_t id)
 // {
 //     spiFlashHandler->read(addr, rx);
 //     Accels a;
