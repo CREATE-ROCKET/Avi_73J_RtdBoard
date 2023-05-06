@@ -5,7 +5,7 @@
 
 #include <Arduino.h>
 
-#include "../domain/accel.h"
+#include "../domain/data.h"
 #include "flash_repository_usecase.h"
 #include "../interfaces/database/flash_repository.h"
 
@@ -17,24 +17,18 @@ private:
 public:
     FlashInteractor(FlashRepository *flashRepository) :flashRepository(flashRepository) {}
 
-    bool AddAccel(uint8_t addr, Accel accel);
-    Accel OneAccel(uint8_t id);
-    // Accels PageAccels(uint8_t id);
+    bool AddData(uint8_t addr, Data data);
+    Data OneData(uint8_t id);
 };
 
-bool FlashInteractor::AddAccel(uint8_t addr, Accel accel)
+bool FlashInteractor::AddData(uint8_t addr, Data data)
 {
-    return flashRepository->SaveAccel(addr, accel);
+    return flashRepository->SaveData(addr, data);
 }
 
-Accel FlashInteractor::OneAccel(uint8_t id)
+Data FlashInteractor::OneData(uint8_t id)
 {
-    return flashRepository->GetAccel(id);
+    return flashRepository->GetData(id);
 }
-
-// Accels FlashInteractor::PageAccels(uint8_t id)
-// {
-//     return accelRepository->GetAccels(id);
-// }
 
 #endif

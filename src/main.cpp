@@ -6,10 +6,8 @@
 
 void loop()
 {
-    Accel accel;
-    accel.AccelX = 1;
-    accel.AccelY = 2;
-    accel.AccelZ = 3;
+    Data a;
+    a.id = 1;
     uint8_t addr = 0;
-    Router1.flashController->Add(addr, accel);
+    Router1.flashController->Add(addr, a);
 }

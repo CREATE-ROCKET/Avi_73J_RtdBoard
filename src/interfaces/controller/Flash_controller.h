@@ -5,7 +5,7 @@
 
 #include <Arduino.h>
 
-#include "../../domain/accel.h"
+#include "../../domain/data.h"
 
 #include "../../usecase/flash_interactor.h"
 #include "../../usecase/flash_repository_usecase.h"
@@ -19,31 +19,25 @@ private:
     FlashInteractor Interactor;
 
 public:
-    FlashController(SPIFlashHandlerDATABASE* handler) : Interactor(new FlashRepositoryDATABASE(handler)) {}
+    FlashController(SPIFlashHandlerDATABASE *handler) : Interactor(new FlashRepositoryDATABASE(handler)) {}
 
-    bool Add(uint8_t addr, Accel accel);
-    Accel Read(uint8_t id);
-    // Accels ReadPage(uint8_t id);
+    bool Add(uint8_t addr, Data data);
+    Data Read(uint8_t id);
 };
 
-FlashController *NewFlashController(SPIFlashHandlerDATABASE* handler)
+FlashController *NewFlashController(SPIFlashHandlerDATABASE *handler)
 {
     return new FlashController(handler);
 }
 
-bool FlashController::Add(uint8_t addr, Accel accel)
+bool FlashController::Add(uint8_t addr, Data data)
 {
-    return Interactor.AddAccel(addr, accel);
+    return Interactor.AddData(addr, data);
 }
 
-Accel FlashController::Read(uint8_t id)
+Data FlashController::Read(uint8_t id)
 {
-    return Interactor.OneAccel(id);
+    return Interactor.OneData(id);
 }
-
-// Accels FlashController::ReadPage(uint8_t id)
-// {
-//     return Interactor.PageAccels(id);
-// }
 
 #endif

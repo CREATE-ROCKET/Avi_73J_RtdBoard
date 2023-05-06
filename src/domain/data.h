@@ -7,12 +7,10 @@
 #include <vector>
 #include <Arduino.h>
 
-class Accel
+class Data
 {
 public:
-    uint8_t AccelX;
-    uint8_t AccelY;
-    uint8_t AccelZ;
+    uint8_t id;
 };
 
 // std::vector<Accel> Accels;
