@@ -9,30 +9,30 @@
 #include "accel_repository_usecase.h"
 #include "../interfaces/database/accel_repository.h"
 
-class AccelInteractor
+class FlashInteractor
 {
 private:
-    AccelRepository *accelRepository;
+    FlashRepository *flashRepository;
 
 public:
-    AccelInteractor(AccelRepository *accelRepository) : accelRepository(accelRepository) {}
+    FlashInteractor(FlashRepository *flashRepository) :flashRepository(flashRepository) {}
 
     bool AddAccel(uint8_t addr, Accel accel);
     Accel OneAccel(uint8_t id);
     // Accels PageAccels(uint8_t id);
 };
 
-bool AccelInteractor::AddAccel(uint8_t addr, Accel accel)
+bool FlashInteractor::AddAccel(uint8_t addr, Accel accel)
 {
     return accelRepository->SaveAccel(addr, accel);
 }
 
-Accel AccelInteractor::OneAccel(uint8_t id)
+Accel FlashInteractor::OneAccel(uint8_t id)
 {
     return accelRepository->GetAccel(id);
 }
 
-// Accels AccelInteractor::PageAccels(uint8_t id)
+// Accels FlashInteractor::PageAccels(uint8_t id)
 // {
 //     return accelRepository->GetAccels(id);
 // }
