@@ -37,7 +37,7 @@
 class Router
 {
 public:
-    FlashController *flashController;
+    AccelController *accelController;
 
 };
 
@@ -52,9 +52,9 @@ void setup()
     newSPIFlashHandler->begin(newSPICREATEHandler->SPI, flashCS, SPIFREQ);
     // newICM20948Handler->begin(newSPICREATEHandler->SPI, ICMCS, SPIFREQ);
 
-    FlashController *flashController = NewFlashController(newSPIFlashHandler);
+    AccelController *accelController = NewAccelController(newSPIFlashHandler);
 
-    Router1.flashController = flashController;
+    Router1.accelController = accelController;
 }
 
 #endif
