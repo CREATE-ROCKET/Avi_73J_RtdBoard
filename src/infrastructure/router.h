@@ -7,7 +7,7 @@
 #include "spicreatehandler.h"
 #include "spiflash_handler.h"
 #include "icm20948_handler.h"
-#include "../interfaces/controller/Accel_controller.h"
+#include "../interfaces/controller/Flash_controller.h"
 #include "../interfaces/database/spiflash_handler.h"
 
 #define SPIFREQ 5000000

@@ -7,8 +7,8 @@
 
 #include "spiflash_handler.h"
 #include "../../domain/accel.h"
-#include "../../usecase/accel_interactor.h"
-#include "../../usecase/accel_repository_usecase.h"
+#include "../../usecase/flash_interactor.h"
+#include "../../usecase/flash_repository_usecase.h"
 
 
 

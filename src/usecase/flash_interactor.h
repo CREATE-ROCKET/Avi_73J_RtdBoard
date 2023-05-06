@@ -6,8 +6,8 @@
 #include <Arduino.h>
 
 #include "../domain/accel.h"
-#include "accel_repository_usecase.h"
-#include "../interfaces/database/accel_repository.h"
+#include "flash_repository_usecase.h"
+#include "../interfaces/database/flash_repository.h"
 
 class FlashInteractor
 {

@@ -7,11 +7,11 @@
 
 #include "../../domain/accel.h"
 
-#include "../../usecase/accel_interactor.h"
-#include "../../usecase/accel_repository_usecase.h"
+#include "../../usecase/flash_interactor.h"
+#include "../../usecase/flash_repository_usecase.h"
 
 #include "../database/spiflash_handler.h"
-#include "../database/accel_repository.h"
+#include "../database/flash_repository.h"
 
 class FlashController
 {
