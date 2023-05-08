@@ -5,7 +5,7 @@
 
 #include <Arduino.h>
 
-class SPIFlashHandlerDATABASE
+class SPIFlashHandler
 {
 public:
     virtual void begin(SPICREATE::SPICreate *targetSPI, int cs, uint32_t freq = 8000000) = 0;

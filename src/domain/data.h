@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef ACCEL_H
-#define ACCEL_H
+#ifndef DATA_H
+#define DATA_H
 
 #include <string>
 #include <vector>
@@ -13,8 +13,5 @@ public:
     uint8_t id;
 };
 
-// std::vector<Accel> Accels;
 
 #endif
-
-// 1ページに書き込まれている加速度の数が8

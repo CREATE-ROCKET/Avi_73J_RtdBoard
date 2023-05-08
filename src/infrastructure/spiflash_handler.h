@@ -9,7 +9,7 @@
 #include "../interfaces/database/spiflash_handler.h"
 #include <S25FL512S.h>
 
-class SPIFlashHandler : public SPIFlashHandlerDATABASE
+class SPIFlashHandlerDATABASE : public SPIFlashHandler
 {
 public:
     Flash *flash;
@@ -21,40 +21,40 @@ public:
     void read(uint32_t addr, uint8_t *rx) override;
 };
 
-SPIFlashHandlerDATABASE *NewSPIFlashHandler()
+SPIFlashHandler *NewSPIFlashHandlerDATABASE()
 {
     Flash *targetFlash = new Flash();
-    SPIFlashHandler *targetSPIFlashHandler = new SPIFlashHandler();
-    targetSPIFlashHandler->flash = targetFlash;
-    return targetSPIFlashHandler;
+    SPIFlashHandlerDATABASE *targetSPIFlashHandlerDATABASE = new SPIFlashHandlerDATABASE();
+    targetSPIFlashHandlerDATABASE->flash = targetFlash;
+    return targetSPIFlashHandlerDATABASE;
 }
 
-void SPIFlashHandler::begin(SPICREATE::SPICreate *targetSPI, int cs, uint32_t freq)
+void SPIFlashHandlerDATABASE::begin(SPICREATE::SPICreate *targetSPI, int cs, uint32_t freq)
 {
     flash->begin(targetSPI, cs, freq);
 }
 
-uint32_t SPIFlashHandler::checkAddress(uint32_t FlashAddress)
+uint32_t SPIFlashHandlerDATABASE::checkAddress(uint32_t FlashAddress)
 {
     return flash->checkAddress(FlashAddress);
 }
 
-uint32_t SPIFlashHandler::setFlashAddress()
+uint32_t SPIFlashHandlerDATABASE::setFlashAddress()
 {
     return flash->setFlashAddress();
 }
 
-void SPIFlashHandler::erase()
+void SPIFlashHandlerDATABASE::erase()
 {
     flash->erase();
 }
 
-void SPIFlashHandler::write(uint32_t addr, uint8_t *tx)
+void SPIFlashHandlerDATABASE::write(uint32_t addr, uint8_t *tx)
 {
     flash->write(addr, tx);
 }
 
-void SPIFlashHandler::read(uint32_t addr, uint8_t *rx)
+void SPIFlashHandlerDATABASE::read(uint32_t addr, uint8_t *rx)
 {
     flash->read(addr, rx);
 }

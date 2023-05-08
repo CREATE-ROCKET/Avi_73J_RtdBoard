@@ -6,18 +6,18 @@
 #include <Arduino.h>
 #include <SPICREATE.h>
 
-class SPICREATEHadndler
+class SPICREATEHandler
 {
 public:
     SPICREATE::SPICreate *SPI;
 };
 
-SPICREATEHadndler *NewSPICreate()
+SPICREATEHandler *NewSPICreate()
 {
     SPICREATE::SPICreate *targetSPI = new SPICREATE::SPICreate();
-    SPICREATEHadndler *targetSPICREATEHadndler = new SPICREATEHadndler();
-    targetSPICREATEHadndler->SPI = targetSPI;
-    return targetSPICREATEHadndler;
+    SPICREATEHandler *targetSPICREATEHandler = new SPICREATEHandler();
+    targetSPICREATEHandler->SPI = targetSPI;
+    return targetSPICREATEHandler;
 }
 
 #endif

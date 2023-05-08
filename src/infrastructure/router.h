@@ -8,7 +8,10 @@
 #include "spiflash_handler.h"
 #include "icm20948_handler.h"
 #include "../interfaces/controller/Flash_controller.h"
+#include "../interfaces/controller/Icm20948_controller.h"
 #include "../interfaces/database/spiflash_handler.h"
+#include "../interfaces/controller/Icm20948_controller.h"
+
 
 #define SPIFREQ 5000000
 
@@ -37,24 +40,38 @@
 class Router
 {
 public:
-    FlashController *flashController;
-
+    // FlashController *flashController;
+    Icm20948Controller *icm20948Controller;
 };
 
 Router Router1;
 
+uint32_t address = 0;
+
 void setup()
 {
-    SPICREATEHadndler *newSPICREATEHandler = NewSPICreate();
-    SPIFlashHandlerDATABASE *newSPIFlashHandler = NewSPIFlashHandler();
-    // ICM20948HandlerDATABASE *newICM20948Handler = NewICM20948Handler();
+    Serial.begin(115200);
 
-    newSPIFlashHandler->begin(newSPICREATEHandler->SPI, flashCS, SPIFREQ);
-    // newICM20948Handler->begin(newSPICREATEHandler->SPI, ICMCS, SPIFREQ);
+    SPICREATEHandler *newSPICREATEHandler = NewSPICreate();
+    SPIFlashHandler *newSPIFlashHandlerDATABASE = NewSPIFlashHandlerDATABASE();
 
-    FlashController *flashController = NewFlashController(newSPIFlashHandler);
+    ICM20948Handler *newICM20948HandlerDATABASE = NewICM20948HandlerDATABASE();
 
-    Router1.flashController = flashController;
+    newSPIFlashHandlerDATABASE->begin(newSPICREATEHandler->SPI, flashCS, SPIFREQ);
+    uint32_t address = newSPIFlashHandlerDATABASE->setFlashAddress();
+
+    newICM20948HandlerDATABASE->begin(newSPICREATEHandler->SPI, ICMCS, SPIFREQ);
+    uint8_t number = newICM20948HandlerDATABASE->WhoAmI();
+    if (number != 0x98)
+    {
+        Serial.println("ICM20948 is not connected.");
+    }
+
+    // FlashController *flashController = NewFlashController(newSPIFlashHandlerDATABASE);
+    Icm20948Controller *icm20948Controller = NewIcm20948Controller(newSPIFlashHandlerDATABASE);
+
+    // Router1.flashController = flashController;
+    Router1.icm20948Controller = icm20948Controller;
 }
 
 #endif
