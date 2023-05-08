@@ -7,7 +7,6 @@
 #include "../infrastructure/spicreatehandler.h"
 #include "../infrastructure/spiflash_handler.h"
 #include "../infrastructure/icm20948_handler.h"
-#include "../interfaces/controller/flash_controller.h"
 #include "../interfaces/controller/icm20948_controller.h"
 #include "../interfaces/database/spiflash_handler.h"
 #include "../interfaces/controller/icm20948_controller.h"

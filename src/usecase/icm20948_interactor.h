@@ -14,7 +14,6 @@ private:
 public:
     ICM20948Interactor(ICM20948Repository *icm20948Repository) : icm20948Repository(icm20948Repository) {}
 
-
     bool AddData(uint8_t addr);
 };
 

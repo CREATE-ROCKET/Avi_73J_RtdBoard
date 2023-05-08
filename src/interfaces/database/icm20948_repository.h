@@ -6,8 +6,6 @@
 #include "../../interfaces/database/spiflash_handler.h"
 #include "../../interfaces/database/icm20948_handler.h"
 #include "../../domain/data.h"
-#include "../../usecase/flash_interactor.h"
-#include "../../usecase/flash_repository_usecase.h"
 
 class ICM20948RepositoryDATABASE : public ICM20948Repository
 {
