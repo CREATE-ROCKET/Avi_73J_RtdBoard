@@ -50,14 +50,15 @@ void setup()
 {
     Serial.begin(115200);
 
-    SPICREATEHandler *newSPICREATEHandler = NewSPICreate();
+    SPICREATEHandlerDATABASE *newSPICREATEHandlerDATABASE = NewSPICreate();
+    newSPICREATEHandlerDATABASE->begin(VSPI, SCK1, MISO1, MOSI1, SPIFREQ);
 
     SPIFlashHandler *newSPIFlashHandlerDATABASE = NewSPIFlashHandlerDATABASE();
-    newSPIFlashHandlerDATABASE->begin(newSPICREATEHandler->SPI, flashCS, SPIFREQ);
+    newSPIFlashHandlerDATABASE->begin(newSPICREATEHandlerDATABASE->SPI, flashCS, SPIFREQ);
     uint32_t address = newSPIFlashHandlerDATABASE->setFlashAddress();
 
     ICM20948Handler *newICM20948HandlerDATABASE = NewICM20948HandlerDATABASE();
-    newICM20948HandlerDATABASE->begin(newSPICREATEHandler->SPI, ICMCS, SPIFREQ);
+    newICM20948HandlerDATABASE->begin(newSPICREATEHandlerDATABASE->SPI, ICMCS, SPIFREQ);
     uint8_t number = newICM20948HandlerDATABASE->WhoAmI();
     if (number != 0x98)
     {

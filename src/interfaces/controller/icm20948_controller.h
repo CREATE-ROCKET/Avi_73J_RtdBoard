@@ -20,6 +20,7 @@ public:
     ICM20948Controller(ICM20948Interactor *icm20948Interactor) : icm20948Interactor(icm20948Interactor) {}
 
     bool Add(uint8_t addr);
+    Data Get(int16_t *rx, uint8_t *rx_buf);
 };
 
 ICM20948Controller *NewICM20948Controller(SPIFlashHandler *spiflashHandler, ICM20948Handler *icm20948Handler)
@@ -30,6 +31,16 @@ ICM20948Controller *NewICM20948Controller(SPIFlashHandler *spiflashHandler, ICM2
 bool ICM20948Controller::Add(uint8_t addr)
 {
     return icm20948Interactor->AddData(addr);
+}
+
+Data ICM20948Controller::Get(int16_t *rx, uint8_t *rx_buf)
+{
+    icm20948Interactor->GetData(rx, rx_buf);
+    Data result;
+    result.accel[0] = rx_buf[0];
+    result.accel[1] = rx_buf[1];
+    result.accel[2] = rx_buf[2];
+    return result;
 }
 
 #endif

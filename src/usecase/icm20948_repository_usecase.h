@@ -9,6 +9,7 @@ class ICM20948Repository
 {
 public:
     virtual bool SaveData(uint8_t addr) = 0;
+    virtual void GainData(int16_t *rx, uint8_t *rx_buf) = 0;
 };
 
 #endif
