@@ -3,8 +3,6 @@
 #ifndef SPIFLASH_HANDLER_DATABASE_H
 #define SPIFLASH_HANDLER_DATABASE_H
 
-#include <Arduino.h>
-
 class SPIFlashHandler
 {
 public:

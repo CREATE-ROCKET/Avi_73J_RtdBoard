@@ -3,9 +3,7 @@
 #ifndef ICM20948_HANDLER_H
 #define ICM20948_HANDLER_H
 
-#include <Arduino.h>
-
-#include "spicreatehandler.h"
+#include "../infrastructure/spicreatehandler.h"
 #include "../interfaces/database/icm20948_handler.h"
 #include <ICM20948.h>
 

@@ -3,7 +3,6 @@
 #ifndef SPI_CREATE_H
 #define SPI_CREATE_H
 
-#include <Arduino.h>
 #include <SPICREATE.h>
 
 class SPICREATEHandler

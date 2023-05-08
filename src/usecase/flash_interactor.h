@@ -3,11 +3,9 @@
 #ifndef FLASH_INTERACTOR_H
 #define FLASH_INTERACTOR_H
 
-#include <Arduino.h>
-
 #include "../domain/data.h"
-#include "flash_repository_usecase.h"
-#include "../interfaces/database/flash_repository.h"
+#include "../usecase/flash_repository_usecase.h"
+// #include "../interfaces/database/flash_repository.h"
 
 // class FlashInteractor
 // {

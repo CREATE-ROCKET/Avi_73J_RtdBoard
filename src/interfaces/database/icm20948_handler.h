@@ -3,8 +3,6 @@
 #ifndef ICM20948_HANDLER_DATABASE_H
 #define ICM20948_HANDLER_DATABASE_H
 
-#include <Arduino.h>
-
 class ICM20948Handler
 {
 public:

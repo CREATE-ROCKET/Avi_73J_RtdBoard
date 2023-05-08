@@ -3,15 +3,13 @@
 #ifndef FLASH_CONTROLLER_H
 #define FLASH_CONTROLLER_H
 
-#include <Arduino.h>
-
 #include "../../domain/data.h"
 
 #include "../../usecase/flash_interactor.h"
 #include "../../usecase/flash_repository_usecase.h"
 
-#include "../database/spiflash_handler.h"
-#include "../database/flash_repository.h"
+#include "../../interfaces/database/spiflash_handler.h"
+#include "../../interfaces/database/flash_repository.h"
 
 // class FlashController
 // {

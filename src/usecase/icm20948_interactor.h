@@ -3,36 +3,34 @@
 #ifndef ICM20948_INTERACTOR_H
 #define ICM20948_INTERACTOR_H
 
-#include <Arduino.h>
-
 #include "../domain/data.h"
-#include "icm20948_repository_usecase.h"
-#include "../interfaces/database/icm20948_repository.h"
+#include "../usecase/icm20948_repository_usecase.h"
 
-class Icm20948Interactor
+class ICM20948Interactor
 {
 private:
-    Icm20948Repository *icm20948Repository;
+    ICM20948Repository *icm20948Repository;
 
 public:
-    Icm20948Interactor(Icm20948Repository *icm20948Repository) : icm20948Repository(icm20948Repository) {}
+    ICM20948Interactor(ICM20948Repository *icm20948Repository) : icm20948Repository(icm20948Repository) {}
 
-    bool AddData(uint8_t addr, Data data);
+
+    bool AddData(uint8_t addr);
     // Data OneData(uint8_t id);
     // bool EraseData();
 };
 
-bool Icm20948Interactor::AddData(uint8_t addr, Data data)
+bool ICM20948Interactor::AddData(uint8_t addr)
 {
-    return icm20948Repository->SaveData(addr, data);
+    return icm20948Repository->SaveData(addr);
 }
 
-// Data Icm20948Interactor::OneData(uint8_t id)
+// Data ICM20948Interactor::OneData(uint8_t id)
 // {
 //     return icm20948Repository->GetData(id);
 // }
 
-// bool Icm20948Interactor::EraseData()
+// bool ICM20948Interactor::EraseData()
 // {
 //     return icm20948Repository->DeleteData();
 // }

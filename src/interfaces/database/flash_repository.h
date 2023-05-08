@@ -3,9 +3,7 @@
 #ifndef FLASH_REPOSITORY_H
 #define FLASH_REPOSITORY_H
 
-#include <Arduino.h>
-
-#include "spiflash_handler.h"
+#include "../../interfaces/database/spiflash_handler.h"
 #include "../../domain/data.h"
 #include "../../usecase/flash_interactor.h"
 #include "../../usecase/flash_repository_usecase.h"

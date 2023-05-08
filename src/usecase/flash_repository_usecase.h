@@ -3,8 +3,6 @@
 #ifndef FLASH_REPOSITORY_USECASE_H
 #define FLASH_REPOSITORY_USECASE_H
 
-#include <Arduino.h>
-
 #include "../domain/data.h"
 
 // class FlashRepository

@@ -4,13 +4,13 @@
 #define ROUTER_H
 
 #include <Arduino.h>
-#include "spicreatehandler.h"
-#include "spiflash_handler.h"
-#include "icm20948_handler.h"
-#include "../interfaces/controller/Flash_controller.h"
-#include "../interfaces/controller/Icm20948_controller.h"
+#include "../infrastructure/spicreatehandler.h"
+#include "../infrastructure/spiflash_handler.h"
+#include "../infrastructure/icm20948_handler.h"
+#include "../interfaces/controller/flash_controller.h"
+#include "../interfaces/controller/icm20948_controller.h"
 #include "../interfaces/database/spiflash_handler.h"
-#include "../interfaces/controller/Icm20948_controller.h"
+#include "../interfaces/controller/icm20948_controller.h"
 
 
 #define SPIFREQ 5000000
@@ -41,7 +41,7 @@ class Router
 {
 public:
     // FlashController *flashController;
-    Icm20948Controller *icm20948Controller;
+    ICM20948Controller *icm20948Controller;
 };
 
 Router Router1;
@@ -53,13 +53,12 @@ void setup()
     Serial.begin(115200);
 
     SPICREATEHandler *newSPICREATEHandler = NewSPICreate();
+
     SPIFlashHandler *newSPIFlashHandlerDATABASE = NewSPIFlashHandlerDATABASE();
-
-    ICM20948Handler *newICM20948HandlerDATABASE = NewICM20948HandlerDATABASE();
-
     newSPIFlashHandlerDATABASE->begin(newSPICREATEHandler->SPI, flashCS, SPIFREQ);
     uint32_t address = newSPIFlashHandlerDATABASE->setFlashAddress();
 
+    ICM20948Handler *newICM20948HandlerDATABASE = NewICM20948HandlerDATABASE();
     newICM20948HandlerDATABASE->begin(newSPICREATEHandler->SPI, ICMCS, SPIFREQ);
     uint8_t number = newICM20948HandlerDATABASE->WhoAmI();
     if (number != 0x98)
@@ -68,7 +67,7 @@ void setup()
     }
 
     // FlashController *flashController = NewFlashController(newSPIFlashHandlerDATABASE);
-    Icm20948Controller *icm20948Controller = NewIcm20948Controller(newSPIFlashHandlerDATABASE);
+    ICM20948Controller *icm20948Controller = NewICM20948Controller(newSPIFlashHandlerDATABASE, newICM20948HandlerDATABASE);
 
     // Router1.flashController = flashController;
     Router1.icm20948Controller = icm20948Controller;

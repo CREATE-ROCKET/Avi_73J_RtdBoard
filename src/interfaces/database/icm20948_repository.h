@@ -3,37 +3,39 @@
 #ifndef ICM20948_REPOSITORY_H
 #define ICM20948_REPOSITORY_H
 
-#include <Arduino.h>
-
-#include "spiflash_handler.h"
+#include "../../interfaces/database/spiflash_handler.h"
+#include "../../interfaces/database/icm20948_handler.h"
 #include "../../domain/data.h"
 #include "../../usecase/flash_interactor.h"
 #include "../../usecase/flash_repository_usecase.h"
 
-class Icm20948RepositoryDATABASE : public Icm20948Repository
+class ICM20948RepositoryDATABASE : public ICM20948Repository
 {
 private:
     SPIFlashHandler *spiFlashHandler;
+    ICM20948Handler *icm20948Handler;
 
 public:
-    // Icm20948RepositoryDATABASE(SPIFlashHandler *spiFlashHandler, ICM20948Handler *icm20948Handler) : Icm20948Repository(spiFlashHandler, icm20948Handler) {}
-    Icm20948RepositoryDATABASE(SPIFlashHandler *spiFlashHandler) : spiFlashHandler(spiFlashHandler) {}
-    // Icm20948Repository(SPIFlashHandler *spiFlashHandler) : spiFlashHandler(spiFlashHandler) {}
+    // ICM20948RepositoryDATABASE(SPIFlashHandler *spiFlashHandler, ICM20948Handler *icm20948Handler) : ICM20948Repository(spiFlashHandler, icm20948Handler) {}
+    // ICM20948RepositoryDATABASE(SPIFlashHandler *spiFlashHandler) : spiFlashHandler(spiFlashHandler) {}
+    // ICM20948RepositoryDATABASE(ICM20948Handler *icm20948Handler) : icm20948Handler(icm20948Handler) {}
+    ICM20948RepositoryDATABASE(SPIFlashHandler *spiFlashHandler, ICM20948Handler *icm20948Handler) : spiFlashHandler(spiFlashHandler), icm20948Handler(icm20948Handler) {}
 
-    bool SaveData(uint8_t addr, Data data) override;
+    bool SaveData(uint8_t addr) override;
     // Data GetData(uint8_t addr) override;
     // bool DeleteData() override;
 };
 
-bool Icm20948RepositoryDATABASE::SaveData(uint8_t addr, Data data)
+bool ICM20948RepositoryDATABASE::SaveData(uint8_t addr)
 {
-    uint8_t tx[3];
-    tx[0] = data.id;
-    spiFlashHandler->write(addr, tx);
+    int16_t rx[3];
+    uint8_t rx_buf[3];
+    icm20948Handler->Get(rx, rx_buf);
+    spiFlashHandler->write(addr, rx_buf);
     return true;
 }
 
-// Data Icm20948RepositoryDATABASE::GetData(uint8_t addr)
+// Data ICM20948RepositoryDATABASE::GetData(uint8_t addr)
 // {
 //     uint8_t rx[3];
 //     spiFlashHandler->read(addr, rx);
@@ -42,7 +44,7 @@ bool Icm20948RepositoryDATABASE::SaveData(uint8_t addr, Data data)
 //     return a;
 // }
 
-// bool Icm20948RepositoryDATABASE::DeleteData()
+// bool ICM20948RepositoryDATABASE::DeleteData()
 // {
 //     spiFlashHandler->erase();
 //     return true;

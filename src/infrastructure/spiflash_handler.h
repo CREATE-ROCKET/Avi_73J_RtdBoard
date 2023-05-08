@@ -3,8 +3,6 @@
 #ifndef SPIFLASH_HANDLER_H
 #define SPIFLASH_HANDLER_H
 
-#include <Arduino.h>
-
 #include "spicreatehandler.h"
 #include "../interfaces/database/spiflash_handler.h"
 #include <S25FL512S.h>
