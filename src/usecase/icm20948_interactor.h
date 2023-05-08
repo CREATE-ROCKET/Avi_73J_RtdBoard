@@ -16,23 +16,11 @@ public:
 
 
     bool AddData(uint8_t addr);
-    // Data OneData(uint8_t id);
-    // bool EraseData();
 };
 
 bool ICM20948Interactor::AddData(uint8_t addr)
 {
     return icm20948Repository->SaveData(addr);
 }
-
-// Data ICM20948Interactor::OneData(uint8_t id)
-// {
-//     return icm20948Repository->GetData(id);
-// }
-
-// bool ICM20948Interactor::EraseData()
-// {
-//     return icm20948Repository->DeleteData();
-// }
 
 #endif

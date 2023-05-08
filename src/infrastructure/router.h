@@ -40,7 +40,6 @@
 class Router
 {
 public:
-    // FlashController *flashController;
     ICM20948Controller *icm20948Controller;
 };
 
@@ -66,10 +65,8 @@ void setup()
         Serial.println("ICM20948 is not connected.");
     }
 
-    // FlashController *flashController = NewFlashController(newSPIFlashHandlerDATABASE);
     ICM20948Controller *icm20948Controller = NewICM20948Controller(newSPIFlashHandlerDATABASE, newICM20948HandlerDATABASE);
 
-    // Router1.flashController = flashController;
     Router1.icm20948Controller = icm20948Controller;
 }
 
