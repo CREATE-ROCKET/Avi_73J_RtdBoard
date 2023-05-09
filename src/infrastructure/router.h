@@ -7,10 +7,10 @@
 #include "../infrastructure/spicreatehandler.h"
 #include "../infrastructure/spiflash_handler.h"
 #include "../infrastructure/icm20948_handler.h"
+#include "../infrastructure/lps25_handler.h"
 #include "../interfaces/controller/icm20948_controller.h"
 #include "../interfaces/database/spiflash_handler.h"
-#include "../interfaces/controller/icm20948_controller.h"
-
+#include "../interfaces/controller/lps25_controller.h"
 
 #define SPIFREQ 5000000
 
@@ -40,6 +40,7 @@ class Router
 {
 public:
     ICM20948Controller *icm20948Controller;
+    LPS25Controller *lps25Controller;
 };
 
 Router Router1;
@@ -50,24 +51,44 @@ void setup()
 {
     Serial.begin(115200);
 
+    // SPICREATE
     SPICREATEHandlerDATABASE *newSPICREATEHandlerDATABASE = NewSPICreate();
     newSPICREATEHandlerDATABASE->begin(VSPI, SCK1, MISO1, MOSI1, SPIFREQ);
 
-    SPIFlashHandler *newSPIFlashHandlerDATABASE = NewSPIFlashHandlerDATABASE();
+    // SPIFLASH
+    SPIFlashHandlerDATABASE *newSPIFlashHandlerDATABASE = NewSPIFlashHandlerDATABASE();
     newSPIFlashHandlerDATABASE->begin(newSPICREATEHandlerDATABASE->SPI, flashCS, SPIFREQ);
+    // newSPIFlashHandlerDATABASE->erase();
     uint32_t address = newSPIFlashHandlerDATABASE->setFlashAddress();
 
-    ICM20948Handler *newICM20948HandlerDATABASE = NewICM20948HandlerDATABASE();
+    // ICM20948
+    ICM20948HandlerDATABASE *newICM20948HandlerDATABASE = NewICM20948HandlerDATABASE();
     newICM20948HandlerDATABASE->begin(newSPICREATEHandlerDATABASE->SPI, ICMCS, SPIFREQ);
     uint8_t number = newICM20948HandlerDATABASE->WhoAmI();
     if (number != 0x98)
     {
         Serial.println("ICM20948 is not connected.");
+        Serial.println(number);
     }
 
-    ICM20948Controller *icm20948Controller = NewICM20948Controller(newSPIFlashHandlerDATABASE, newICM20948HandlerDATABASE);
+    // LPS25
+    LPS25HandlerDATABASE *newLPS25HandlerDATABASE = NewLPS25HandlerDATABASE();
+    newLPS25HandlerDATABASE->begin(newSPICREATEHandlerDATABASE->SPI, LPSCS, SPIFREQ);
+    uint8_t number2 = newLPS25HandlerDATABASE->WhoAmI();
+    if (number2 != 0xBD)
+    {
+        Serial.println("LPS25 is not connected.");
+        Serial.println(number2);
+    }
 
+    // Controller Initialization
+    // ICM20948 Controller
+    ICM20948Controller *icm20948Controller = NewICM20948Controller(newSPIFlashHandlerDATABASE, newICM20948HandlerDATABASE);
     Router1.icm20948Controller = icm20948Controller;
+
+    // LPS25 Controller
+    LPS25Controller *lps25Controller = NewLPS25Controller(newSPIFlashHandlerDATABASE, newLPS25HandlerDATABASE);
+    Router1.lps25Controller = lps25Controller;
 }
 
 #endif

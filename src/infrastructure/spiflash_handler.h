@@ -19,7 +19,7 @@ public:
     void read(uint32_t addr, uint8_t *rx) override;
 };
 
-SPIFlashHandler *NewSPIFlashHandlerDATABASE()
+SPIFlashHandlerDATABASE *NewSPIFlashHandlerDATABASE()
 {
     Flash *targetFlash = new Flash();
     SPIFlashHandlerDATABASE *targetSPIFlashHandlerDATABASE = new SPIFlashHandlerDATABASE();

@@ -24,7 +24,7 @@ public:
     void transmit(uint8_t *tx, uint8_t *rx, int size, int deviceHandle) override;
     void transmit(spi_transaction_t *transaction, int deviceHandle) override;
 
-        void pollTransmit(spi_transaction_t *transaction, int deviceHandle) override;
+    void pollTransmit(spi_transaction_t *transaction, int deviceHandle) override;
 };
 
 SPICREATEHandlerDATABASE *NewSPICreate()

@@ -16,7 +16,7 @@ public:
     void Get(int16_t *rx, uint8_t *rx_buf) override;
 };
 
-ICM20948Handler *NewICM20948HandlerDATABASE()
+ICM20948HandlerDATABASE *NewICM20948HandlerDATABASE()
 {
     ICM *targetICM20948 = new ICM();
     ICM20948HandlerDATABASE *targetICM20948HandlerDATABASE = new ICM20948HandlerDATABASE();
