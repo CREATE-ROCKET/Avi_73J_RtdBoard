@@ -20,14 +20,6 @@ public:
     void read(uint32_t addr, uint8_t *rx) override;
 };
 
-// SPIFlashHandlerDATABASE *NewSPIFlashHandlerDATABASE()
-// {
-//     Flash *targetFlash = new Flash();
-//     SPIFlashHandlerDATABASE *targetSPIFlashHandlerDATABASE = new SPIFlashHandlerDATABASE();
-//     targetSPIFlashHandlerDATABASE->flash = targetFlash;
-//     return targetSPIFlashHandlerDATABASE;
-// }
-
 std::shared_ptr<SPIFlashHandlerDATABASE> NewSPIFlashHandlerDATABASE()
 {
     std::shared_ptr<Flash> targetFlash = std::make_shared<Flash>();

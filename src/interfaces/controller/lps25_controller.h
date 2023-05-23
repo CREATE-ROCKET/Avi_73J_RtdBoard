@@ -23,11 +23,6 @@ public:
     Data Get(uint8_t *rx);
 };
 
-// LPS25Controller *NewLPS25Controller(SPIFlashHandler *spiflashHandler, LPS25Handler *lps25Handler)
-// {
-//     return new LPS25Controller(new LPS25Interactor(new LPS25RepositoryDATABASE(spiflashHandler, lps25Handler)));
-// }
-
 std::shared_ptr<LPS25Controller> NewLPS25Controller(std::shared_ptr<SPIFlashHandler> spiflashHandler, std::shared_ptr<LPS25Handler> lps25Handler)
 {
     std::shared_ptr<LPS25RepositoryDATABASE> lps25Repository = std::make_shared<LPS25RepositoryDATABASE>(spiflashHandler, lps25Handler);

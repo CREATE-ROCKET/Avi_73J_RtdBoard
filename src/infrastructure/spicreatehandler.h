@@ -28,14 +28,6 @@ public:
     void pollTransmit(spi_transaction_t *transaction, int deviceHandle) override;
 };
 
-// SPICREATEHandlerDATABASE *NewSPICreate()
-// {
-//     SPICREATE::SPICreate *targetSPI = new SPICREATE::SPICreate();
-//     SPICREATEHandlerDATABASE *targetSPICREATEHandlerDATABASE = new SPICREATEHandlerDATABASE();
-//     targetSPICREATEHandlerDATABASE->SPI = targetSPI;
-//     return targetSPICREATEHandlerDATABASE;
-// }
-
 std::shared_ptr<SPICREATEHandlerDATABASE> NewSPICreate()
 {
     std::shared_ptr<SPICREATE::SPICreate> targetSPI = std::make_shared<SPICREATE::SPICreate>();

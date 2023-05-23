@@ -19,14 +19,6 @@ public:
     void Get(uint8_t *rx) override;
 };
 
-// LPS25HandlerDATABASE *NewLPS25HandlerDATABASE()
-// {
-//     LPS *targetLPS25 = new LPS();
-//     LPS25HandlerDATABASE *targetLPS25HandlerDATABASE = new LPS25HandlerDATABASE();
-//     targetLPS25HandlerDATABASE->lps25 = targetLPS25;
-//     return targetLPS25HandlerDATABASE;
-// }
-
 std::shared_ptr<LPS25HandlerDATABASE> NewLPS25HandlerDATABASE()
 {
     std::shared_ptr<LPS> targetLPS25 = std::make_shared<LPS>();
