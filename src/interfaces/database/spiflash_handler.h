@@ -6,7 +6,7 @@
 class SPIFlashHandler
 {
 public:
-    virtual void begin(SPICREATE::SPICreate *targetSPI, int cs, uint32_t freq = 8000000) = 0;
+    virtual void begin(std::shared_ptr<SPICREATE::SPICreate> targetSPI, int cs, uint32_t freq = 8000000) = 0;
     virtual uint32_t checkAddress(uint32_t FlashAddress) = 0;
     virtual uint32_t setFlashAddress() = 0;
     virtual void erase() = 0;

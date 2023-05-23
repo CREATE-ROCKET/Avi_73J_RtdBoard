@@ -9,10 +9,10 @@
 class LPS25Interactor
 {
 private:
-    LPS25Repository *lps25Repository;
+    std::shared_ptr<LPS25Repository> lps25Repository;
 
 public:
-    LPS25Interactor(LPS25Repository *lps25Repository) : lps25Repository(lps25Repository) {}
+    LPS25Interactor(std::shared_ptr<LPS25Repository> lps25Repository) : lps25Repository(lps25Repository) {}
 
     bool AddData(uint8_t addr);
     void GetData(uint8_t *rx);

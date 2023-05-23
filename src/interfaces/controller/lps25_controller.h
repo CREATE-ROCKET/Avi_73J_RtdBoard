@@ -14,18 +14,20 @@
 class LPS25Controller
 {
 private:
-    LPS25Interactor *lps25Interactor;
+    std::shared_ptr<LPS25Interactor> lps25Interactor;
 
 public:
-    LPS25Controller(LPS25Interactor *lps25Interactor) : lps25Interactor(lps25Interactor) {}
+    LPS25Controller(std::shared_ptr<LPS25Interactor> lps25Interactor) : lps25Interactor(lps25Interactor) {}
 
     bool Add(uint8_t addr);
     Data Get(uint8_t *rx);
 };
 
-LPS25Controller *NewLPS25Controller(SPIFlashHandler *spiflashHandler, LPS25Handler *lps25Handler)
+std::shared_ptr<LPS25Controller> NewLPS25Controller(std::shared_ptr<SPIFlashHandler> spiflashHandler, std::shared_ptr<LPS25Handler> lps25Handler)
 {
-    return new LPS25Controller(new LPS25Interactor(new LPS25RepositoryDATABASE(spiflashHandler, lps25Handler)));
+    std::shared_ptr<LPS25RepositoryDATABASE> lps25Repository = std::make_shared<LPS25RepositoryDATABASE>(spiflashHandler, lps25Handler);
+    std::shared_ptr<LPS25Interactor> lps25Interactor = std::make_shared<LPS25Interactor>(lps25Repository);
+    return std::make_shared<LPS25Controller>(lps25Interactor);
 }
 
 bool LPS25Controller::Add(uint8_t addr)

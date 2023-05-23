@@ -4,6 +4,7 @@
 .vscode/launch.json
 .vscode/ipch
 platformio-device-monitor*.log
+device-monitor*.log
 src/*
 !src/main.cpp
 !src/*/

@@ -12,11 +12,12 @@
 class LPS25RepositoryDATABASE : public LPS25Repository
 {
 private:
-    SPIFlashHandler *spiFlashHandler;
-    LPS25Handler *lps25Handler;
+    std::shared_ptr<SPIFlashHandler> spiFlashHandler;
+    std::shared_ptr<LPS25Handler> lps25Handler;
 
 public:
-    LPS25RepositoryDATABASE(SPIFlashHandler *spiFlashHandler, LPS25Handler *lps25Handler) : spiFlashHandler(spiFlashHandler), lps25Handler(lps25Handler) {}
+    LPS25RepositoryDATABASE(std::shared_ptr<SPIFlashHandler> spiFlashHandler, std::shared_ptr<LPS25Handler> lps25Handler)
+        : spiFlashHandler(spiFlashHandler), lps25Handler(lps25Handler) {}
 
     bool SaveData(uint8_t addr) override;
     void GainData(uint8_t *rx) override;

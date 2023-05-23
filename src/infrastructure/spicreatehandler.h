@@ -5,11 +5,12 @@
 
 #include "../interfaces/database/spicreate_handler.h"
 #include <SPICREATE.h>
+#include <memory>
 
 class SPICREATEHandlerDATABASE : public SPICREATEHandler
 {
 public:
-    SPICREATE::SPICreate *SPI;
+    std::shared_ptr<SPICREATE::SPICreate> SPI;
     bool begin(uint8_t spi_bus = HSPI, int8_t sck = -1, int8_t miso = -1, int8_t mosi = -1, uint32_t f = 8000000) override;
     bool end() override;
 
@@ -27,10 +28,10 @@ public:
     void pollTransmit(spi_transaction_t *transaction, int deviceHandle) override;
 };
 
-SPICREATEHandlerDATABASE *NewSPICreate()
+std::shared_ptr<SPICREATEHandlerDATABASE> NewSPICreate()
 {
-    SPICREATE::SPICreate *targetSPI = new SPICREATE::SPICreate();
-    SPICREATEHandlerDATABASE *targetSPICREATEHandlerDATABASE = new SPICREATEHandlerDATABASE();
+    std::shared_ptr<SPICREATE::SPICreate> targetSPI = std::make_shared<SPICREATE::SPICreate>();
+    std::shared_ptr<SPICREATEHandlerDATABASE> targetSPICREATEHandlerDATABASE = std::make_shared<SPICREATEHandlerDATABASE>();
     targetSPICREATEHandlerDATABASE->SPI = targetSPI;
     return targetSPICREATEHandlerDATABASE;
 }
