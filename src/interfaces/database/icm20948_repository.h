@@ -12,11 +12,12 @@
 class ICM20948RepositoryDATABASE : public ICM20948Repository
 {
 private:
-    SPIFlashHandler *spiFlashHandler;
-    ICM20948Handler *icm20948Handler;
+    std::shared_ptr<SPIFlashHandler> spiFlashHandler;
+    std::shared_ptr<ICM20948Handler> icm20948Handler;
 
 public:
-    ICM20948RepositoryDATABASE(SPIFlashHandler *spiFlashHandler, ICM20948Handler *icm20948Handler) : spiFlashHandler(spiFlashHandler), icm20948Handler(icm20948Handler) {}
+    ICM20948RepositoryDATABASE(std::shared_ptr<SPIFlashHandler> spiFlashHandler, std::shared_ptr<ICM20948Handler> icm20948Handler)
+        : spiFlashHandler(spiFlashHandler), icm20948Handler(icm20948Handler) {}
 
     bool SaveData(uint8_t addr) override;
     void GainData(int16_t *rx, uint8_t *rx_buf) override;

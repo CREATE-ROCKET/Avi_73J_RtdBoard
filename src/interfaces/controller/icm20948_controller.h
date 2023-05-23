@@ -14,26 +14,26 @@
 class ICM20948Controller
 {
 private:
-    ICM20948Interactor *icm20948Interactor;
+    std::shared_ptr<ICM20948Interactor> icm20948Interactor;
 
 public:
-    ICM20948Controller(ICM20948Interactor *icm20948Interactor) : icm20948Interactor(icm20948Interactor) {}
+    ICM20948Controller(std::shared_ptr<ICM20948Interactor> icm20948Interactor) : icm20948Interactor(icm20948Interactor) {}
 
     bool Add(uint8_t addr);
     Data Get(int16_t *rx, uint8_t *rx_buf);
 };
 
-ICM20948Controller *NewICM20948Controller(SPIFlashHandler *spiflashHandler, ICM20948Handler *icm20948Handler)
-{
-    return new ICM20948Controller(new ICM20948Interactor(new ICM20948RepositoryDATABASE(spiflashHandler, icm20948Handler)));
-}
-
-// std::shared_ptr<ICM20948Controller> NewICM20948Controller(std::shared_ptr<SPIFlashHandler> spiflashHandler, std::shared_ptr<ICM20948Handler> icm20948Handler)
+// ICM20948Controller *NewICM20948Controller(SPIFlashHandler *spiflashHandler, ICM20948Handler *icm20948Handler)
 // {
-//     std::shared_ptr<ICM20948RepositoryDATABASE> icm20948Repository = std::make_shared<ICM20948RepositoryDATABASE>(spiflashHandler, icm20948Handler);
-//     std::shared_ptr<ICM20948Interactor> icm20948Interactor = std::make_shared<ICM20948Interactor>(icm20948Repository);
-//     return std::make_shared<ICM20948Controller>(icm20948Interactor);
+//     return new ICM20948Controller(new ICM20948Interactor(new ICM20948RepositoryDATABASE(spiflashHandler, icm20948Handler)));
 // }
+
+std::shared_ptr<ICM20948Controller> NewICM20948Controller(std::shared_ptr<SPIFlashHandler> spiflashHandler, std::shared_ptr<ICM20948Handler> icm20948Handler)
+{
+    std::shared_ptr<ICM20948RepositoryDATABASE> icm20948Repository = std::make_shared<ICM20948RepositoryDATABASE>(spiflashHandler, icm20948Handler);
+    std::shared_ptr<ICM20948Interactor> icm20948Interactor = std::make_shared<ICM20948Interactor>(icm20948Repository);
+    return std::make_shared<ICM20948Controller>(icm20948Interactor);
+}
 
 bool ICM20948Controller::Add(uint8_t addr)
 {

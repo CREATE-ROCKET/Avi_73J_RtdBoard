@@ -9,10 +9,10 @@
 class ICM20948Interactor
 {
 private:
-    ICM20948Repository *icm20948Repository;
+    std::shared_ptr<ICM20948Repository> icm20948Repository;
 
 public:
-    ICM20948Interactor(ICM20948Repository *icm20948Repository) : icm20948Repository(icm20948Repository) {}
+    ICM20948Interactor(std::shared_ptr<ICM20948Repository> icm20948Repository) : icm20948Repository(icm20948Repository) {}
 
     bool AddData(uint8_t addr);
     void GetData(int16_t *rx, uint8_t *rx_buf);

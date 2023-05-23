@@ -39,8 +39,8 @@
 class Router
 {
 public:
-    ICM20948Controller *icm20948Controller;
-    LPS25Controller *lps25Controller;
+    std::shared_ptr<ICM20948Controller> icm20948Controller;
+    std::shared_ptr<LPS25Controller> lps25Controller;
 };
 
 Router Router1;
@@ -59,10 +59,10 @@ void setup()
     newSPICREATEHandlerDATABASE->begin(VSPI, SCK1, MISO1, MOSI1, SPIFREQ);
 
     // // SPIFLASH
-    SPIFlashHandlerDATABASE *newSPIFlashHandlerDATABASE = NewSPIFlashHandlerDATABASE();
-    newSPIFlashHandlerDATABASE->begin(newSPICREATEHandlerDATABASE->SPI, flashCS, SPIFREQ);
-    // newSPIFlashHandlerDATABASE->erase();
-    uint32_t address = newSPIFlashHandlerDATABASE->setFlashAddress();
+    // SPIFlashHandlerDATABASE *newSPIFlashHandlerDATABASE = NewSPIFlashHandlerDATABASE();
+    // newSPIFlashHandlerDATABASE->begin(newSPICREATEHandlerDATABASE->SPI, flashCS, SPIFREQ);
+    // // newSPIFlashHandlerDATABASE->erase();
+    // uint32_t address = newSPIFlashHandlerDATABASE->setFlashAddress();
 
     std::shared_ptr<SPIFlashHandlerDATABASE> newSPIFlashHandlerDATABASE = NewSPIFlashHandlerDATABASE();
     newSPIFlashHandlerDATABASE->begin(newSPICREATEHandlerDATABASE->SPI, flashCS, SPIFREQ);
@@ -109,11 +109,11 @@ void setup()
 
     // Controller Initialization
     // ICM20948 Controller
-    ICM20948Controller *icm20948Controller = NewICM20948Controller(newSPIFlashHandlerDATABASE, newICM20948HandlerDATABASE);
+    std::shared_ptr<ICM20948Controller> icm20948Controller = NewICM20948Controller(newSPIFlashHandlerDATABASE, newICM20948HandlerDATABASE);
     Router1.icm20948Controller = icm20948Controller;
 
     // LPS25 Controller
-    LPS25Controller *lps25Controller = NewLPS25Controller(newSPIFlashHandlerDATABASE, newLPS25HandlerDATABASE);
+    std::shared_ptr<LPS25Controller> lps25Controller = NewLPS25Controller(newSPIFlashHandlerDATABASE, newLPS25HandlerDATABASE);
     Router1.lps25Controller = lps25Controller;
 }
 
