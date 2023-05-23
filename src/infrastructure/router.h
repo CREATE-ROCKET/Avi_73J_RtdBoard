@@ -89,6 +89,30 @@ void setup()
     // LPS25 Controller
     std::shared_ptr<LPS25Controller> lps25Controller = NewLPS25Controller(newSPIFlashHandlerDATABASE, newLPS25HandlerDATABASE);
     Router1.lps25Controller = lps25Controller;
+    
+    // delay(3000);
+    Serial.println("Address: " + String(address));
+    // int16_t rx[6] = {};
+    uint8_t rx_buf[256] = {};
+    // for (int i = 0; i < 256; i++)
+    // {
+    //     rx_buf[i] = i;
+    // }
+    // newSPIFlashHandlerDATABASE->write(address, rx_buf);
+    // address += 256;
+    delay(10);
+    for (uint32_t ad = 0; ad < address; ad += 256)
+    {
+        newSPIFlashHandlerDATABASE->read(ad, rx_buf);
+        for (int i = 0; i < 256; i++)
+        {
+            Serial.print(rx_buf[i]);
+            Serial.print(" ");
+        }
+        Serial.println();
+        delay(100);
+    }
+
 }
 
 #endif

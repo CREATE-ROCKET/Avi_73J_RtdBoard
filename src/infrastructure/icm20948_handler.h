@@ -11,7 +11,7 @@
 class ICM20948HandlerDATABASE : public ICM20948Handler
 {
 public:
-    ICM *icm20948;
+    std::shared_ptr<ICM> icm20948;
     void begin(std::shared_ptr<SPICREATE::SPICreate> targetSPI, int cs, uint32_t freq = 8000000) override;
     uint8_t WhoAmI() override;
     void Get(int16_t *rx, uint8_t *rx_buf) override;
@@ -21,7 +21,7 @@ std::shared_ptr<ICM20948HandlerDATABASE> NewICM20948HandlerDATABASE()
 {
     std::shared_ptr<ICM> targetICM20948 = std::make_shared<ICM>();
     std::shared_ptr<ICM20948HandlerDATABASE> targetICM20948HandlerDATABASE = std::make_shared<ICM20948HandlerDATABASE>();
-    targetICM20948HandlerDATABASE->icm20948 = targetICM20948.get();
+    targetICM20948HandlerDATABASE->icm20948 = targetICM20948;
     return targetICM20948HandlerDATABASE;
 }
 
