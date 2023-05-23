@@ -28,6 +28,13 @@ ICM20948Controller *NewICM20948Controller(SPIFlashHandler *spiflashHandler, ICM2
     return new ICM20948Controller(new ICM20948Interactor(new ICM20948RepositoryDATABASE(spiflashHandler, icm20948Handler)));
 }
 
+// std::shared_ptr<ICM20948Controller> NewICM20948Controller(std::shared_ptr<SPIFlashHandler> spiflashHandler, std::shared_ptr<ICM20948Handler> icm20948Handler)
+// {
+//     std::shared_ptr<ICM20948RepositoryDATABASE> icm20948Repository = std::make_shared<ICM20948RepositoryDATABASE>(spiflashHandler, icm20948Handler);
+//     std::shared_ptr<ICM20948Interactor> icm20948Interactor = std::make_shared<ICM20948Interactor>(icm20948Repository);
+//     return std::make_shared<ICM20948Controller>(icm20948Interactor);
+// }
+
 bool ICM20948Controller::Add(uint8_t addr)
 {
     return icm20948Interactor->AddData(addr);

@@ -6,12 +6,13 @@
 #include "../infrastructure/spicreatehandler.h"
 #include "../interfaces/database/spiflash_handler.h"
 #include <S25FL512S.h>
+#include <memory>
 
 class SPIFlashHandlerDATABASE : public SPIFlashHandler
 {
 public:
-    Flash *flash;
-    void begin(SPICREATE::SPICreate *targetSPI, int cs, uint32_t freq = 8000000) override;
+    std::shared_ptr<Flash> flash;
+    void begin(std::shared_ptr<SPICREATE::SPICreate> *targetSPI, int cs, uint32_t freq = 8000000) override;
     uint32_t checkAddress(uint32_t FlashAddress) override;
     uint32_t setFlashAddress() override;
     void erase() override;
@@ -19,17 +20,25 @@ public:
     void read(uint32_t addr, uint8_t *rx) override;
 };
 
-SPIFlashHandlerDATABASE *NewSPIFlashHandlerDATABASE()
+// SPIFlashHandlerDATABASE *NewSPIFlashHandlerDATABASE()
+// {
+//     Flash *targetFlash = new Flash();
+//     SPIFlashHandlerDATABASE *targetSPIFlashHandlerDATABASE = new SPIFlashHandlerDATABASE();
+//     targetSPIFlashHandlerDATABASE->flash = targetFlash;
+//     return targetSPIFlashHandlerDATABASE;
+// }
+
+std::shared_ptr<SPIFlashHandlerDATABASE> NewSPIFlashHandlerDATABASE()
 {
-    Flash *targetFlash = new Flash();
-    SPIFlashHandlerDATABASE *targetSPIFlashHandlerDATABASE = new SPIFlashHandlerDATABASE();
+    std::shared_ptr<Flash> targetFlash = std::make_shared<Flash>();
+    std::shared_ptr<SPIFlashHandlerDATABASE> targetSPIFlashHandlerDATABASE = std::make_shared<SPIFlashHandlerDATABASE>();
     targetSPIFlashHandlerDATABASE->flash = targetFlash;
     return targetSPIFlashHandlerDATABASE;
 }
 
-void SPIFlashHandlerDATABASE::begin(SPICREATE::SPICreate *targetSPI, int cs, uint32_t freq)
+void SPIFlashHandlerDATABASE::begin(std::shared_ptr<SPICREATE::SPICreate> *targetSPI, int cs, uint32_t freq)
 {
-    flash->begin(targetSPI, cs, freq);
+    flash->begin(targetSPI->get(), cs, freq);
 }
 
 uint32_t SPIFlashHandlerDATABASE::checkAddress(uint32_t FlashAddress)
