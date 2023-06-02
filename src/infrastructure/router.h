@@ -61,6 +61,7 @@ void print_wakeup_reason()
         break;
     case ESP_SLEEP_WAKEUP_TIMER:
         Serial.println("Wakeup caused by timer");
+        esp_deep_sleep_start();
         break;
     case ESP_SLEEP_WAKEUP_TOUCHPAD:
         Serial.println("Wakeup caused by touchpad");
@@ -103,6 +104,8 @@ void setup()
     Serial.println("Setup ESP32 to sleep for every " + String(TIME_TO_SLEEP) + " Seconds");
 
     esp_sleep_enable_ext0_wakeup(GPIO_NUM_33, ESP_EXT1_WAKEUP_ANY_HIGH); // GPIO_NUM_?, ? = {0, 2, 4, 12-15, 25-27, 32-39}
+
+    print_wakeup_reason(); // Setting the above two esp_sleep_enable_x former makes ESP32's move right when ESP32 will sleep in this function in case that wake_up_reason is ESP_SLEEP_WAKEUP_TIMER.
 
     // SPICREATE
     std::shared_ptr<SPICREATEHandlerDATABASE> newSPICREATEHandlerDATABASE = NewSPICreate();
