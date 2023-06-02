@@ -4,6 +4,12 @@
 
 #include "infrastructure/router.h"
 
+boolean something_action_by_transaction()
+{
+    // ここにトランザクションを記述する
+    return false;
+}
+
 void loop()
 {
     bool check = Router1.icm20948Controller->Add(address);
@@ -31,7 +37,15 @@ void loop()
     // Serial.println(result2.pressure[0]);
     // Serial.println(result2.pressure[1]);
     // Serial.println(result2.pressure[2]);
-    
+
     Router1.icm20948Controller->Add(address);
     delay(1000);
+
+    if (something_action_by_transaction())
+    {
+        Serial.println("Going to sleep now");
+        Serial.flush();
+
+        esp_deep_sleep_start();
+    }
 }
