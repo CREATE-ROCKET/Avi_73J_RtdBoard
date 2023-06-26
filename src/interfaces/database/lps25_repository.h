@@ -5,9 +5,11 @@
 
 #include "../../interfaces/database/spiflash_handler.h"
 #include "../../interfaces/database/lps25_handler.h"
+#include "../../usecase/lps25_repository_usecase.h"
 #include "../../domain/data.h"
 
 #include <Arduino.h>
+#include <memory>
 
 class LPS25RepositoryDATABASE : public LPS25Repository
 {
@@ -23,17 +25,17 @@ public:
     void GainData(uint8_t *rx) override;
 };
 
-bool LPS25RepositoryDATABASE::SaveData(uint8_t addr)
-{
-    uint8_t rx[3] = {};
-    lps25Handler->Get(rx);
-    spiFlashHandler->write(addr, rx);
-    return true;
-}
+// bool LPS25RepositoryDATABASE::SaveData(uint8_t addr)
+// {
+//     uint8_t rx[3] = {};
+//     lps25Handler->Get(rx);
+//     spiFlashHandler->write(addr, rx);
+//     return true;
+// }
 
-void LPS25RepositoryDATABASE::GainData(uint8_t *rx)
-{
-    lps25Handler->Get(rx);
-}
+// void LPS25RepositoryDATABASE::GainData(uint8_t *rx)
+// {
+//     lps25Handler->Get(rx);
+// }
 
 #endif

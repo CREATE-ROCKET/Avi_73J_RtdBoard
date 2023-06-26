@@ -3,6 +3,9 @@
 #ifndef SPICREATE_HANDLER_DATABASE_H
 #define SPICREATE_HANDLER_DATABASE_H
 
+#include <Arduino.h>
+#include <SPICREATE.h>
+
 class SPICREATEHandler
 {
 public:

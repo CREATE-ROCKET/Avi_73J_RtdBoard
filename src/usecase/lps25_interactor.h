@@ -5,6 +5,7 @@
 
 #include "../domain/data.h"
 #include "../usecase/lps25_repository_usecase.h"
+#include <memory>
 
 class LPS25Interactor
 {
@@ -18,14 +19,14 @@ public:
     void GetData(uint8_t *rx);
 };
 
-bool LPS25Interactor::AddData(uint8_t addr)
-{
-    return lps25Repository->SaveData(addr);
-}
+// bool LPS25Interactor::AddData(uint8_t addr)
+// {
+//     return lps25Repository->SaveData(addr);
+// }
 
-void LPS25Interactor::GetData(uint8_t *rx)
-{
-    lps25Repository->GainData(rx);
-}
+// void LPS25Interactor::GetData(uint8_t *rx)
+// {
+//     lps25Repository->GainData(rx);
+// }
 
 #endif

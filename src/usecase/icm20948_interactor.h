@@ -5,6 +5,7 @@
 
 #include "../domain/data.h"
 #include "../usecase/icm20948_repository_usecase.h"
+#include <memory>
 
 class ICM20948Interactor
 {
@@ -18,14 +19,14 @@ public:
     void GetData(int16_t *rx, uint8_t *rx_buf);
 };
 
-bool ICM20948Interactor::AddData(uint8_t addr)
-{
-    return icm20948Repository->SaveData(addr);
-}
+// bool ICM20948Interactor::AddData(uint8_t addr)
+// {
+//     return icm20948Repository->SaveData(addr);
+// }
 
-void ICM20948Interactor::GetData(int16_t *rx, uint8_t *rx_buf)
-{
-    icm20948Repository->GainData(rx, rx_buf);
-}
+// void ICM20948Interactor::GetData(int16_t *rx, uint8_t *rx_buf)
+// {
+//     icm20948Repository->GainData(rx, rx_buf);
+// }
 
 #endif

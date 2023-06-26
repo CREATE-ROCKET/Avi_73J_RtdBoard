@@ -4,6 +4,7 @@
 #define ICM20948_REPOSITORY_USECASE_H
 
 #include "../domain/data.h"
+#include <Arduino.h>
 
 class ICM20948Repository
 {
