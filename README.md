@@ -20,7 +20,7 @@ graph TD
     end
     D -->|コマンドとデータ| E  
     B -->|コマンド| A
-    B -->|コマンドとデータ| F
+    B -->|データ| F
     C -->|コマンド| E
 ```
 
@@ -60,4 +60,54 @@ graph TD
     N --> K
 ```
 
-### 実装 
+### 実装
+```mermaid
+%%{ init: { 'flowchart': { 'curve': 'linear' } } }%%
+
+graph TD
+    subgraph CPU0
+        subgraph ジンバル_通信
+            B
+            N
+            G
+            F
+        end
+        subgraph 地上_通信
+            K
+            C
+        end
+        D
+        E
+        M
+    end
+    subgraph CPU1
+        subgraph 加速度_気圧
+            P
+            H
+            I
+            O
+        end
+        subgraph Flash_記録
+            J
+        end
+    end
+    A[電源ON] --> C(地上からのコマンド受信)
+    A --> B(ジンバルからのコマンド受信)
+    C --> |コマンド'***'| D[記録&データ送信開始]
+    C --> |コマンド'***'| E[ジンバルスタート]
+    E --> G(ジンバルにコマンド'***'を送信)
+    D --> F(ジンバルにコマンド'***'を送信)
+    D --> P(データ取得)
+    P --> H(加速度データを取る)
+    P --> O(気圧データを取る)
+    O --> I(Formatする)
+    H --> I
+    I --> J(Flashに書き込む)
+    I --> K(地上に送信)
+    J --> L(繰り返す 加速度データを取るところに戻る)
+    K --> L
+    B --> |コマンド'***'| M[ジンバルデータ受信開始]
+    M --> N(データ受け取る)
+    N --> K
+```
+
