@@ -3,20 +3,21 @@
 #ifndef ICM20948_INTERACTOR_H
 #define ICM20948_INTERACTOR_H
 
-#include "../domain/data.h"
-#include "../usecase/icm20948_repository_usecase.h"
 #include <memory>
 
-class ICM20948Interactor
-{
-private:
-    std::shared_ptr<ICM20948Repository> icm20948Repository;
+#include "../domain/data.h"
+#include "../usecase/icm20948_repository_usecase.h"
 
-public:
-    ICM20948Interactor(std::shared_ptr<ICM20948Repository> icm20948Repository) : icm20948Repository(icm20948Repository) {}
+class ICM20948Interactor {
+ private:
+  std::shared_ptr<ICM20948Repository> icm20948Repository;
 
-    bool AddData(uint8_t addr);
-    void GetData(int16_t *rx, uint8_t *rx_buf);
+ public:
+  ICM20948Interactor(std::shared_ptr<ICM20948Repository> icm20948Repository)
+      : icm20948Repository(icm20948Repository) {}
+
+  bool AddData(uint8_t addr);
+  void GetData(int16_t *rx, uint8_t *rx_buf);
 };
 
 // bool ICM20948Interactor::AddData(uint8_t addr)
