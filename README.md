@@ -111,3 +111,43 @@ graph TD
     N --> K
 ```
 
+### ディレクトリ依存関係 v2
+```mermaid
+%%{ init: { 'flowchart': { 'curve': 'linear' } } }%%
+
+graph TD
+    subgraph domain
+        A
+        C
+        D
+    end
+    subgraph usecase
+        B
+    end
+    subgraph write
+        E
+    end
+    subgraph com
+        subgraph ground
+            F
+            I
+        end
+        subgraph gimbal
+            G
+            H
+        end
+    end
+    B[usecase/format.h] --> A[domain/accel.h]
+    B[usecase/format.h] --> C[domain/pressure.h]
+    C --> D[domain/setting.h]
+    A --> D
+    E[write/s25fl512s.h] --> B
+    E[write/s25fl512s.h] --> D
+    F[com/ground/send.h] --> D
+    I[com/ground/receive.h] --> G[com/gimbal/send.h]
+    H[com/gimbal/receive.h] --> F
+    J[main.cpp] --> H
+    J[main.cpp] --> I
+    J[main.cpp] --> D
+    J[main.cpp] --> E
+```
