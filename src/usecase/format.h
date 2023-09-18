@@ -13,8 +13,8 @@
 #include <iostream>
 #include <memory>
 
-#include "accel.h"
-#include "pressure.h"
+#include "domain/accel.h"
+#include "domain/pressure.h"
 
 class formatter {
    public:

@@ -14,8 +14,8 @@
 #include <iostream>
 #include <memory>
 
-#include "domain/format.h"
 #include "domain/setting.h"
+#include "usecase/format.h"
 
 #define WritePeriod 1
 
