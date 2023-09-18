@@ -1,9 +1,9 @@
-# Avi_73J_Board
+# Avi_73J_Board v2
 
-## システム構成
+## システム構成 v2
 
-## RTD基板システム要件
-### 各基板とのつながり
+## RTD基板システム要件 v2
+### 各基板とのつながり v2
 ```mermaid
 graph TD
     subgraph ジンバル基板
@@ -24,7 +24,7 @@ graph TD
     C -->|コマンド| E
 ```
 
-### RTD基板の仕様
+### RTD基板の仕様 v2
 ```mermaid
 graph TD
     subgraph CPU0
@@ -60,7 +60,7 @@ graph TD
     N --> K
 ```
 
-### 実装
+### 実装 v2
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'linear' } } }%%
 
