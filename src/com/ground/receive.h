@@ -37,6 +37,8 @@ IRAM_ATTR void GroundReceive(void *parameters) {
                                 Gimbal_Send(command);
                                 GroundMode = 0;
                             default:
+                                Serial.println(command);
+                                Gimbal_Send(command);
                                 break;
                         }
                     }
@@ -58,6 +60,8 @@ IRAM_ATTR void GroundReceive(void *parameters) {
                                 Gimbal_Send(command);
                                 GroundMode = 0;
                             default:
+                                Serial.println(command);
+                                Gimbal_Send(command);
                                 break;
                         }
                     }
@@ -83,6 +87,8 @@ IRAM_ATTR void GroundReceive(void *parameters) {
 //             Gimbal_Send(command);
 //             GroundMode = 0;
 //         default:
+//             Serial.println(command);
+//             Gimbal_Send(command);
 //             break;
 //     }
 // }
