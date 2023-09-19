@@ -53,6 +53,7 @@ void Ground_Send_Stack(char *command_data) {
             cash[cash_len] = command_data[0];
             cash_len++;
         }
+        // cashが満タンのときデータは捨てる
     }
     lock.unlock();
 }
