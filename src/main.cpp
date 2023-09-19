@@ -3,11 +3,12 @@
 
 #include "com/gimbal/receive.h"
 #include "com/ground/receive.h"
+#include "com/ground/send.h"
 #include "domain/setting.h"
 #include "write/s25fl512s.h"
 
-TaskHandle_t taskHandle[3];
-// xTaskHandle xlogHandle0;
+TaskHandle_t taskHandle[4];
+xTaskHandle xlogHandle0;
 // xTaskHandle xlogHandle11;
 // xTaskHandle xlogHandle12;
 
@@ -45,10 +46,14 @@ void setup() {
                          PRO_CPU_NUM);
 
     // 通信用関数を起動
+    // 受信用
     xTaskCreateUniversal(GimbalReceive, "GimbalReceive", 8192, NULL, 1,
                          &taskHandle[1], APP_CPU_NUM);
     xTaskCreateUniversal(GroundReceive, "GroundReceive", 8192, NULL, 1,
                          &taskHandle[2], APP_CPU_NUM);
+    // 送信用
+    xTaskCreateUniversal(GroundSend, "GroundSend", 8192, NULL, 1,
+                         &taskHandle[3], APP_CPU_NUM);
 }
 
 void loop() {}

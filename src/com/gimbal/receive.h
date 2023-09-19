@@ -60,7 +60,7 @@ IRAM_ATTR void GimbalReceive(void *parameters) {
                         }
                     }
                 }
-                Ground_Send(command);
+                Ground_Send_Stack(command);
                 break;
             default:
                 break;
