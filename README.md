@@ -128,6 +128,7 @@ graph TD
     end
     subgraph usecase
         B
+        K
     end
     subgraph write
         E
@@ -150,10 +151,11 @@ graph TD
     E[write/s25fl512s.h] --> D
     F[com/ground/send.h] --> D
     I[com/ground/receive.h] --> G[com/gimbal/send.h]
-    H[com/gimbal/receive.h] --> F
+    H[com/gimbal/receive.h] --> K[usecase/stack.h]
     J[main.cpp] --> H
     J[main.cpp] --> I
     J[main.cpp] --> D
     J[main.cpp] --> E
     J[main.cpp] --> F
+    K[usecase/stack.h] --> D    
 ```
