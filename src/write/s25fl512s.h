@@ -11,8 +11,10 @@
 #include <SPICREATE.h>
 
 #include <algorithm>
+#include <atomic>
 #include <iostream>
 #include <memory>
+#include <mutex>
 
 #include "domain/setting.h"
 #include "usecase/format.h"
@@ -40,8 +42,10 @@ void s25fl512_writer::Write() {
     // データの取得と整形
     formatter1->Format();
     // 送信データの作成または更新
+    std::unique_lock<std::mutex> lock(sendDataMutex);
     std::copy(std::begin(formatter1->SPI_FlashBuff),
               std::end(formatter1->SPI_FlashBuff), std::begin(Send_Data));
+    lock.unlock();
     // データの書き込み
     flash1->write(SPIFlashLatestAddress, formatter1->SPI_FlashBuff);
     // アドレスの更新

@@ -3,6 +3,8 @@
 #ifndef SETTING_H
 #define SETTING_H
 
+#include <mutex>
+
 // ピンの定義
 #define flashCS 27
 #define SCK1 33
@@ -24,5 +26,7 @@ uint8_t GroundMode = 0;
 uint8_t GimbalMode = 0;
 
 uint8_t Send_Data[256] = {};
+
+std::mutex sendDataMutex;
 
 #endif

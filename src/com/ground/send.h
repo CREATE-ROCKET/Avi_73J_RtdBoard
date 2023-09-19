@@ -5,6 +5,8 @@
 
 #include <Arduino.h>
 
+#include <mutex>
+
 #include "domain/setting.h"
 
 uint8_t Gimbal_data_count = 0;
@@ -18,6 +20,7 @@ const uint8_t OnceNumberOfDataExceptGimbalData = 100;
 #define GroundSendPeriod 1
 
 void Ground_Send_Stack(char *command_data) {
+    std::unique_lock<std::mutex> lock(sendDataMutex);
     // Gimbalデータがなく、cashがあるとき
     if ((Gimbal_data_count == 0) && (cash_len > 0)) {
         // cashの量が一回で送れる量以上にあるとき
@@ -51,6 +54,7 @@ void Ground_Send_Stack(char *command_data) {
             cash_len++;
         }
     }
+    lock.unlock();
 }
 
 IRAM_ATTR void GroundSend(void *parameters) {
@@ -59,12 +63,14 @@ IRAM_ATTR void GroundSend(void *parameters) {
     while (!Serial3)
         ;
     for (;;) {
+        std::unique_lock<std::mutex> lock(sendDataMutex);
         for (int i = 0; i < 256; i++) {
             // 送信
             Serial3.write(Send_Data[i]);
             // 配列の初期化
             Send_Data[i] = 0;
         }
+        lock.unlock();
         Gimbal_data_count = 0;
         vTaskDelayUntil(&xLastWakeTime,
                         GroundSendPeriod / portTICK_PERIOD_MS);  // 1ms = 1000Hz
