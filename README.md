@@ -3,7 +3,9 @@
 ## システム構成 v2
 
 ## RTD基板システム要件 v2
+
 ### 各基板とのつながり v2
+
 ```mermaid
 graph TD
     subgraph ジンバル基板
@@ -25,6 +27,7 @@ graph TD
 ```
 
 ### RTD基板の仕様 v2
+
 ```mermaid
 graph TD
     subgraph CPU0
@@ -61,6 +64,7 @@ graph TD
 ```
 
 ### 実装 v2
+
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'linear' } } }%%
 
@@ -112,6 +116,7 @@ graph TD
 ```
 
 ### ディレクトリ依存関係 v2
+
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'linear' } } }%%
 
@@ -150,4 +155,5 @@ graph TD
     J[main.cpp] --> I
     J[main.cpp] --> D
     J[main.cpp] --> E
+    J[main.cpp] --> F
 ```
