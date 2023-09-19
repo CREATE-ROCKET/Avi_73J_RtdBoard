@@ -154,8 +154,8 @@ graph TD
     H[com/gimbal/receive.h] --> K[usecase/stack.h]
     J[main.cpp] --> H
     J[main.cpp] --> I
-    J[main.cpp] --> D
-    J[main.cpp] --> E
     J[main.cpp] --> F
+    J[main.cpp] --> E
+    J[main.cpp] --> D
     K[usecase/stack.h] --> D    
 ```
