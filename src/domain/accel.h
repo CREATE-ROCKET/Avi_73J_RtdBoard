@@ -3,7 +3,7 @@
 #ifndef accel_H
 #define accel_H
 #include <Arduino.h>
-#include <ICM20948.h>
+#include <ICM20602.h>
 
 #include <iostream>
 #include <memory>

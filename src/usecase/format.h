@@ -4,7 +4,7 @@
 #define format_H
 #include <Arduino.h>
 #include <H3LIS331.h>
-#include <ICM20948.h>
+#include <ICM20602.h>
 #include <LPS25HB.h>
 #include <Log67Timer.h>
 #include <S25FL512S.h>
