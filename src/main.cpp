@@ -42,18 +42,14 @@ void setup() {
     delay(1);
 
     // DataWrite関数を起動
-    xTaskCreateUniversal(DataWrite, "DataWrite", 8192, NULL, 1, &taskHandle[0],
-                         PRO_CPU_NUM);
+    xTaskCreateUniversal(DataWrite, "DataWrite", 8192, NULL, 1, &taskHandle[0], PRO_CPU_NUM);
 
     // 通信用関数を起動
     // 受信用
-    xTaskCreateUniversal(GimbalReceive, "GimbalReceive", 8192, NULL, 1,
-                         &taskHandle[1], APP_CPU_NUM);
-    xTaskCreateUniversal(GroundReceive, "GroundReceive", 8192, NULL, 1,
-                         &taskHandle[2], APP_CPU_NUM);
+    xTaskCreateUniversal(GimbalReceive, "GimbalReceive", 8192, NULL, 1, &taskHandle[1], APP_CPU_NUM);
+    xTaskCreateUniversal(GroundReceive, "GroundReceive", 8192, NULL, 1, &taskHandle[2], APP_CPU_NUM);
     // 送信用
-    xTaskCreateUniversal(GroundSend, "GroundSend", 8192, NULL, 1,
-                         &taskHandle[3], APP_CPU_NUM);
+    xTaskCreateUniversal(GroundSend, "GroundSend", 8192, NULL, 1, &taskHandle[3], APP_CPU_NUM);
 }
 
 void loop() {}

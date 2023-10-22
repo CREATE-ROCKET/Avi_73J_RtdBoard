@@ -18,7 +18,7 @@ IRAM_ATTR void GimbalReceive(void *parameters) {
     while (!Serial2)
         ;
     char command[1];
-    uint8_t GimbalMode = 0;
+    // uint8_t GimbalMode = 0;
     for (;;) {
         switch (GimbalMode) {
             case 0:  // コマンドを受け取るモード
@@ -65,8 +65,7 @@ IRAM_ATTR void GimbalReceive(void *parameters) {
             default:
                 break;
         }
-        vTaskDelayUntil(&xLastWakeTime,
-                        GimbalPeriod / portTICK_PERIOD_MS);  // 1ms = 1000Hz
+        vTaskDelayUntil(&xLastWakeTime, GimbalPeriod / portTICK_PERIOD_MS);  // 1ms = 1000Hz
     }
 }
 

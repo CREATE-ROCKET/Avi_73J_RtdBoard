@@ -24,14 +24,12 @@ class pressure {
     std::shared_ptr<LPS> lps25;
 };
 
-void pressure::Get(uint8_t *SPI_FlashBuff,
-                   int CountSPIFlashDataSetExistInBuff) {
+void pressure::Get(uint8_t *SPI_FlashBuff, int CountSPIFlashDataSetExistInBuff) {
     uint8_t lps_rx[3] = {};
     // LPSの気圧をとる
     lps25->Get(lps_rx);
     for (int index = 28; index < 31; index++) {
-        SPI_FlashBuff[32 * CountSPIFlashDataSetExistInBuff + index] =
-            lps_rx[index - 28];
+        SPI_FlashBuff[32 * CountSPIFlashDataSetExistInBuff + index] = lps_rx[index - 28];
     }
 }
 

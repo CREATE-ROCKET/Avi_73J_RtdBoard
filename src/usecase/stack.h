@@ -40,8 +40,7 @@ void Ground_Send_Stack(char *command_data) {
     }
     // Gimbalデータが1回で送れる量以下のとき
     if (Gimbal_data_count < OnceNumberOfGimbalData) {
-        Send_Data[OnceNumberOfDataExceptGimbalData + Gimbal_data_count] =
-            command_data[0];
+        Send_Data[OnceNumberOfDataExceptGimbalData + Gimbal_data_count] = command_data[0];
         Gimbal_data_count++;
     } else {  // 1回で送れる量以上にGimbalデータがあるとき
         // cashが満タンでないとき

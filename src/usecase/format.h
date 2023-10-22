@@ -20,7 +20,7 @@ class formatter {
    public:
     formatter() {
         Lps25 = std::make_shared<pressure>();
-        icm20948 = std::make_shared<accel>();
+        icm20602 = std::make_shared<accel>();
         timer = std::make_shared<Log67Timer>();
     }
 
@@ -43,7 +43,7 @@ class formatter {
     // LPS25HBの気圧をとるクラスのインスタンス化
     std::shared_ptr<pressure> Lps25;
     // ICM20948の加速度をとるクラスのインスタンス化
-    std::shared_ptr<accel> icm20948;
+    std::shared_ptr<accel> icm20602;
 
     // Timerクラスのインスタンス化
     std::shared_ptr<Log67Timer> timer;
@@ -59,11 +59,10 @@ void formatter::Format() {
     }
     Record_time = timer->Gettime_record();
     for (int index = 0; index < 4; index++) {
-        SPI_FlashBuff[32 * CountSPIFlashDataSetExistInBuff + index] =
-            0xFF & (Record_time >> (8 * index));
+        SPI_FlashBuff[32 * CountSPIFlashDataSetExistInBuff + index] = 0xFF & (Record_time >> (8 * index));
     }
 
-    icm20948->Get(SPI_FlashBuff, CountSPIFlashDataSetExistInBuff);
+    icm20602->Get(SPI_FlashBuff, CountSPIFlashDataSetExistInBuff);
 
     // LPSの気圧をとる
     if (count_lps % 20 == 0) {

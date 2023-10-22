@@ -43,8 +43,7 @@ void s25fl512_writer::Write() {
     formatter1->Format();
     // 送信データの作成または更新
     std::unique_lock<std::mutex> lock(sendDataMutex);
-    std::copy(std::begin(formatter1->SPI_FlashBuff),
-              std::end(formatter1->SPI_FlashBuff), std::begin(Send_Data));
+    std::copy(std::begin(formatter1->SPI_FlashBuff), std::end(formatter1->SPI_FlashBuff), std::begin(Send_Data));
     lock.unlock();
     // データの書き込み
     flash1->write(SPIFlashLatestAddress, formatter1->SPI_FlashBuff);
@@ -54,14 +53,12 @@ void s25fl512_writer::Write() {
 
 IRAM_ATTR void DataWrite(void *parameters) {
     portTickType xLastWakeTime = xTaskGetTickCount();
-    std::shared_ptr<s25fl512_writer> s25fl512_writer1 =
-        std::make_shared<s25fl512_writer>();
+    std::shared_ptr<s25fl512_writer> s25fl512_writer1 = std::make_shared<s25fl512_writer>();
     for (;;) {
         if (GroundMode == 1) {
             s25fl512_writer1->Write();
         }
-        vTaskDelayUntil(&xLastWakeTime,
-                        WritePeriod / portTICK_PERIOD_MS);  // 1ms = 1000Hz
+        vTaskDelayUntil(&xLastWakeTime, WritePeriod / portTICK_PERIOD_MS);  // 1ms = 1000Hz
     }
 }
 

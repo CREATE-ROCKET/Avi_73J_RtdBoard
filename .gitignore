@@ -9,3 +9,5 @@ src/*
 !src/main.cpp
 !src/*/
 !src/README.md
+
+src/RTD_PARAM.h

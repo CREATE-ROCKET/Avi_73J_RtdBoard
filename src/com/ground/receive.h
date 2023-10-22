@@ -5,6 +5,10 @@
 
 #include <Arduino.h>
 
+#include <NEC920.hpp>
+
+#include "../../domain/setting.h"
+#include "../RFparam/RTD_PARAM.h"
 #include "com/gimbal/send.h"
 
 #define GroundPeriod 1
@@ -12,18 +16,35 @@
 #define GROUND_COMMAND_START 'a'
 #define GROUND_COMMAND_STOP 'b'
 
+uint8_t j = 0x71;
+
 IRAM_ATTR void GroundReceive(void *parameters) {
     portTickType xLastWakeTime = xTaskGetTickCount();
-    Serial3.begin(9600);
-    while (!Serial3)
-        ;
+    if (!isNec920Setup) {
+        nec920.beginSerial(&Serial1, 38400, pin920Rx, pin920Tx);  // 38400
+        nec920.setPin(pin920Reset, pin920Wakeup, pin920Mode);
+        while (nec920.isBootFinished(400000) == 0)
+            ;
+        nec920.setRfConf(j, rtdRFparam::POWER, rtdRFparam::CHANNEL, rtdRFparam::RF_BAND, rtdRFparam::CS_MODE);
+        isNec920Setup = true;
+    }
     char command[1];
-    uint8_t GroundMode = 0;
+    // uint8_t GroundMode = 0;
+    while ((nec920.isRecieveCmdResult()) && (!nec920.checkCmdResult(j++)))
+        ;
     for (;;) {
         switch (GroundMode) {
             case 0:  // 待機モード
-                if (Serial3.available() > 0) {
-                    Serial3.readBytes(command, 1);
+                if (nec920.recieve() > 0) {
+                    if (nec920.isRecieveCmdData()) {
+                        uint8_t tmpArr[256];
+                        uint8_t datalength = nec920.getRecieveData(tmpArr);
+                        // for (int i = 0; i < datalength; i++) {
+                        //     Serial.printf("%02X,", tmpArr[i]);
+                        // }
+                        // datalengthが1だと仮定して
+                        command[0] = tmpArr[0];
+                    }
                     // Ground_command(command, GroundMode);
                     {
                         switch (command[0]) {
@@ -45,8 +66,16 @@ IRAM_ATTR void GroundReceive(void *parameters) {
                 }
                 break;
             case 1:  // 記録するモード
-                if (Serial3.available() > 0) {
-                    Serial3.read(command, 1);
+                if (nec920.recieve() > 0) {
+                    if (nec920.isRecieveCmdData()) {
+                        uint8_t tmpArr[256];
+                        uint8_t datalength = nec920.getRecieveData(tmpArr);
+                        // for (int i = 0; i < datalength; i++) {
+                        //     Serial.printf("%02X,", tmpArr[i]);
+                        // }
+                        // datalengthが1だと仮定して
+                        command[0] = tmpArr[0];
+                    }
                     // Ground_command(command, GroundMode);
                     {
                         switch (command[0]) {
@@ -70,8 +99,7 @@ IRAM_ATTR void GroundReceive(void *parameters) {
             default:
                 break;
         }
-        vTaskDelayUntil(&xLastWakeTime,
-                        GroundPeriod / portTICK_PERIOD_MS);  // 1ms = 1000Hz
+        vTaskDelayUntil(&xLastWakeTime, GroundPeriod / portTICK_PERIOD_MS);  // 1ms = 1000Hz
     }
 }
 
