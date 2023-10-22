@@ -7,9 +7,9 @@
 
 #include <NEC920.hpp>
 
-#include "../../domain/setting.h"
-#include "../RFparam/RTD_PARAM.h"
-#include "domain/setting.h"
+// #include "../../domain/setting.h"
+// #include "../RFparam/RTD_PARAM.h"
+// #include "ground_setting.h"
 
 #define GroundSendPeriod 40
 

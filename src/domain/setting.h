@@ -20,17 +20,8 @@
 #define LEDPIN 18
 #define SPIFREQ 5000000
 
-const int pin920Rx = 18;
-const int pin920Tx = 19;
-const int pin920Reset = 21;
-const int pin920Wakeup = 22;
-const int pin920Mode = 23;
-
 SPICREATE::SPICreate SPIC1;
 SPICREATE::SPICreate SPIC2;
-
-NEC920 nec920;
-bool isNec920Setup = false;
 
 uint8_t GroundMode = 0;
 uint8_t GimbalMode = 0;

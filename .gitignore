@@ -10,4 +10,4 @@ src/*
 !src/*/
 !src/README.md
 
-src/RTD_PARAM.h
+RTD_PARAM.h
